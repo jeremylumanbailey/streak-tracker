@@ -1,10 +1,18 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Button } from 'react-native';
+import { onPressLearnMore } from './utils';
 
-export default function App() {
+
+export default function App(): JSX.Element {
   return (
     <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
+      <Text>Open up App.tsx to start working on your app! ok</Text>
+			<Button
+				onPress={onPressLearnMore}
+				title="Start timer"
+				color="#841584"
+				accessibilityLabel="Learn more about this purple button"
+			/>
       <StatusBar style="auto" />
     </View>
   );
