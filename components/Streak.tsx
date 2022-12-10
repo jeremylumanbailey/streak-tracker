@@ -4,7 +4,7 @@ import { StyleSheet, View, Text } from 'react-native';
 export default function Streak( { date }: { date: string }  ): JSX.Element {
   return (
     <View style={styles.container}>
-			<Text>This is Streak.tsx here is the ${date}</Text>
+			<Text>This is Streak.tsx here is the {date}</Text>
       <StatusBar style="auto" />
     </View>
   );

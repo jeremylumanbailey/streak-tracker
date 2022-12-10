@@ -16,8 +16,8 @@ export const getTimeFromStorage = async (key: string): Promise<string | null> =>
 	return time
 }
 
-export const onPressLearnMore = async (): void => {
-	const time = new Date()
+export const createStreak = async (): Promise<void> => {
+	//const time = new Date()
 	//setTimeInStorage(time.getFullYear().toString(), 'foo')
-	console.log(await getTimeFromStorage('foo'))
+	//console.log(await getTimeFromStorage('foo'))
 }
