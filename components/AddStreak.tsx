@@ -1,10 +1,17 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, View, Button, Text, TextInput } from 'react-native';
 import { createStreak } from '../utils';
-import React from "react";
+import { useState } from "react";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function AddStreak(): JSX.Element {
-	const [ streakTitle, setStreakTitle ] = React.useState("Edit Streak Title");
+	const [ streakTitle, setStreakTitle ] = useState("Edit Streak Title");
+
+		
+	const handlePress = async (): Promise<void> => {
+		await AsyncStorage.setItem(streakTitle, )
+	}
+
   return (
     <View style={styles.container}>
 			<TextInput
@@ -13,7 +20,7 @@ export default function AddStreak(): JSX.Element {
       />
 				<Button
 					title="Add Streak"
-					onPress={createStreak}
+					onPress={handlePress}
 				/>
       <Text>This is AddStreak.tsx hold up</Text>
       <StatusBar style="auto" />

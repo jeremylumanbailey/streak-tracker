@@ -17,7 +17,7 @@ export const getTimeFromStorage = async (key: string): Promise<string | null> =>
 }
 
 export const createStreak = async (): Promise<void> => {
-	//const time = new Date()
-	//setTimeInStorage(time.getFullYear().toString(), 'foo')
-	//console.log(await getTimeFromStorage('foo'))
+	const time = new Date()
+	setTimeInStorage(time.getFullYear().toString(), 'foo')
+	console.log(await getTimeFromStorage('foo'))
 }
