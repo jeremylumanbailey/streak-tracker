@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Button } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, useIsFocused } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import AddStreak from "./components/AddStreak"
 import Settings from './components/Settings';
@@ -20,17 +20,17 @@ const Stack = createNativeStackNavigator();
 
 	
 	export const Home = () => {
-		const [localfoo, setlocalfoo] = useState("not foo")
+		const isFocused = useIsFocused();
+		const [localfoo, setlocalfoo] = useState("LOADING")
 
 		
 		useEffect(() => {
 			const setData = async () => {
 				const ret = await AsyncStorage.getItem("foo")
 				if (typeof ret === 'string') setlocalfoo(ret)
-				return 'dang'
 			}
 			setData()
-		}, [localfoo])
+		}, [isFocused])
 	
 	return (
 		<View style={styles.container}>
@@ -38,11 +38,13 @@ const Stack = createNativeStackNavigator();
       <Text>App.tsx sorry my bad!</Text>
 			{<Streak date={localfoo}></Streak>}
 							<Button
-					title="show keys"
-					onPress={async () => console.log(await AsyncStorage.getAllKeys())}
+					title="log all keys"
+					onPress={async () => {
+						console.log(await AsyncStorage.getAllKeys())
+						const temp = 'foo'
+						console.log(`the value for ${temp} is:`,await AsyncStorage.getItem(temp))
+					}}
 				/>
-			{<Text>should be here: </Text>}
-
       <StatusBar style="auto" />
     </View>
 

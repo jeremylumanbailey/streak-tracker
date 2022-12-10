@@ -4,12 +4,12 @@ import { createStreak } from '../utils';
 import { useState } from "react";
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export default function AddStreak(): JSX.Element {
+export default function AddStreak( { navigation } ): JSX.Element {
 	const [ streakTitle, setStreakTitle ] = useState("Edit Streak Title");
 
 		
 	const handlePress = async (): Promise<void> => {
-		await AsyncStorage.setItem('foo', 'diana')
+		await AsyncStorage.setItem('foo', streakTitle + " value")
 		console.log(await AsyncStorage.getAllKeys())
 	}
 
@@ -23,6 +23,9 @@ export default function AddStreak(): JSX.Element {
 					title="Add Streak"
 					onPress={handlePress}
 				/>
+				<Button title="back to home" onPress={(): void => navigation.navigate('Home')} />
+				<Button title="delete everything" onPress={async (): Promise<void> => await AsyncStorage.clear()} />
+
       <Text>This is AddStreak.tsx hold up</Text>
       <StatusBar style="auto" />
     </View>
