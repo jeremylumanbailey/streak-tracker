@@ -9,7 +9,6 @@ import Streak from './components/Streak';
 import { useEffect, useState } from "react";
 
 const Stack = createNativeStackNavigator();
-//const [arrayOfStreaks, setArrayOfStreaks] = useState<any>({})
 
 	const getAllStreaks = async () => {
 		const keys = await AsyncStorage.getAllKeys()
@@ -19,29 +18,29 @@ const Stack = createNativeStackNavigator();
 		return keys
 	}
 
-	//useEffect(() => {
-	//	const allKeys = async () => {
-	//		const keys = await AsyncStorage.getAllKeys()
-	//		//const streaks = keys.map(item => {
-	//		//	return <Streak date={item} key={item}></Streak>
-	//		//})
-	//		return keys
-	//	}
-	//	let temp = allKeys()
-	//	console.log(temp)
-	//}, [])
+	
+	export const Home = () => {
+		const [localfoo, setlocalfoo] = useState("not foo")
 
-export const Home = async () => {
-
-	const arrayOfStreaks = await AsyncStorage.getItem("foo")
+		
+		useEffect(() => {
+			const setData = async () => {
+				const ret = await AsyncStorage.getItem("foo")
+				if (typeof ret === 'string') setlocalfoo(ret)
+				return 'dang'
+			}
+			setData()
+		}, [localfoo])
 	
 	return (
 		<View style={styles.container}>
 
-      <Text>App.tsx</Text>
-			{/*{arrayOfStreaks.map(item => {
-				return <Streak date={item} key={item}></Streak>
-			})}*/}
+      <Text>App.tsx sorry my bad!</Text>
+			{<Streak date={localfoo}></Streak>}
+							<Button
+					title="show keys"
+					onPress={async () => console.log(await AsyncStorage.getAllKeys())}
+				/>
 			{<Text>should be here: </Text>}
 
       <StatusBar style="auto" />

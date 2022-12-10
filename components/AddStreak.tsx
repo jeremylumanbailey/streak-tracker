@@ -9,7 +9,8 @@ export default function AddStreak(): JSX.Element {
 
 		
 	const handlePress = async (): Promise<void> => {
-		await AsyncStorage.setItem(streakTitle, )
+		await AsyncStorage.setItem('foo', 'diana')
+		console.log(await AsyncStorage.getAllKeys())
 	}
 
   return (
