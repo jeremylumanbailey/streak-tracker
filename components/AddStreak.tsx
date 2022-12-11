@@ -14,19 +14,19 @@ type AddStreakProps = {
 };
 
 export default function AddStreak( { navigation }: AddStreakProps ): JSX.Element {
-	const [ streakTitle, setStreakTitle ] = useState("Edit Streak Title");
+	const [ streakTitle, setStreakTitle ] = useState("");
 
 		
 	const handlePress = async (): Promise<void> => {
 		await AsyncStorage.setItem('foo', streakTitle + " value")
-		console.log(await AsyncStorage.getAllKeys())
 	}
 
   return (
     <View style={styles.container}>
 			<TextInput
         onChangeText={setStreakTitle}
-        value={streakTitle}
+        placeholder={"Add Streak Title"}
+				defaultValue={streakTitle}
       />
 				<Button
 					title="Add Streak"
