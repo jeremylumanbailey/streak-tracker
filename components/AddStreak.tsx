@@ -3,8 +3,17 @@ import { StyleSheet, View, Button, Text, TextInput } from 'react-native';
 import { createStreak } from '../utils';
 import { useState } from "react";
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { StackNavigationProp } from '@react-navigation/stack';
+import type { RootStackParamList } from '../types'
 
-export default function AddStreak( { navigation } ): JSX.Element {
+
+type AddStreakNavigationProp = StackNavigationProp<RootStackParamList>;
+
+type AddStreakProps = {
+  navigation: AddStreakNavigationProp;
+};
+
+export default function AddStreak( { navigation }: AddStreakProps ): JSX.Element {
 	const [ streakTitle, setStreakTitle ] = useState("Edit Streak Title");
 
 		

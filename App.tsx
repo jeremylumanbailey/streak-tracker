@@ -7,8 +7,9 @@ import Settings from './components/Settings';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Streak from './components/Streak';
 import { useEffect, useState } from "react";
+import type { RootStackParamList } from './types'
 
-const Stack = createNativeStackNavigator();
+const nativeStackNavigator = createNativeStackNavigator<RootStackParamList>();
 
 	const getAllStreaks = async () => {
 		const keys = await AsyncStorage.getAllKeys()
@@ -56,22 +57,21 @@ const Stack = createNativeStackNavigator();
 export default function App(): JSX.Element {
   return (		
 		<NavigationContainer>
-
-      <Stack.Navigator>
-				<Stack.Screen
+      <nativeStackNavigator.Navigator initialRouteName="Home">
+				<nativeStackNavigator.Screen
 					name="Home"
 					component={Home}
 					options={({navigation}) => ({
             headerRight: () => <Button title="Add Streak" onPress={(): void => navigation.navigate('AddStreak')} />,
           })}
 				/>
-        <Stack.Screen
+        <nativeStackNavigator.Screen
           name="AddStreak"
           component={AddStreak}
           options={{ title: 'Add a Streak' }}
         />
-        <Stack.Screen name="Settings" component={Settings} />
-      </Stack.Navigator>
+        <nativeStackNavigator.Screen name="Settings" component={Settings} />
+      </nativeStackNavigator.Navigator>
     </NavigationContainer>
   );
 }
