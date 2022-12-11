@@ -7,7 +7,7 @@ module.exports = {
 	rules: {
 		"@typescript-eslint/no-explicit-any": "error",
 		"@typescript-eslint/no-unused-vars": "error",
-		"@typescript-eslint/explicit-function-return-type": "warn",
+		"@typescript-eslint/explicit-function-return-type": "off",
 		"no-console": ["error", { allow: ["error"] }],
 		"react-hooks/rules-of-hooks": "error", // Checks rules of Hooks
     "react-hooks/exhaustive-deps": "warn"
