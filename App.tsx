@@ -11,33 +11,46 @@ import type { RootStackParamList } from './types'
 
 const nativeStackNavigator = createNativeStackNavigator<RootStackParamList>();
 
-	const getAllStreaks = async () => {
-		const keys = await AsyncStorage.getAllKeys()
-		const streaks = keys.map(item => {
-			return <Streak date={item} key={item}></Streak>
-		})
-		return keys
-	}
+	//const getAllStreaks = async () => {
+	//	const keys = await AsyncStorage.getAllKeys()
+	//	const streaks = keys.map(item => {
+	//		return <Streak date={item} key={item}></Streak>
+	//	})
+	//	return keys
+	//}
 
 	
 	export const Home = () => {
 		const isFocused = useIsFocused();
 		const [localfoo, setlocalfoo] = useState("LOADING")
+		const [localStreaks, setLocalStreaks] = useState([''])
 
 		
 		useEffect(() => {
-			const setData = async () => {
-				const ret = await AsyncStorage.getItem("foo")
-				if (typeof ret === 'string') setlocalfoo(ret)
+
+			const getAllStreaks = async () => {
+				const keys = await AsyncStorage.getAllKeys()
+				const streaks = keys.map(item => item)
+				
+
+
+				setLocalStreaks(streaks)
 			}
-			setData()
+			getAllStreaks()
+			//const setData = async () => {
+			//	const ret = await AsyncStorage.getItem("foo")
+			//	if (typeof ret === 'string') setlocalfoo(ret)
+			//}
+			//setData()
 		}, [isFocused])
 	
 	return (
 		<View style={styles.container}>
 
       <Text>App.tsx sorry my bad!</Text>
-			{<Streak date={localfoo}></Streak>}
+			{localStreaks.map(streakDate => {
+				return <Streak date={streakDate} key={streakDate}></Streak>
+			})}
 							<Button
 					title="log all keys"
 					onPress={async () => {

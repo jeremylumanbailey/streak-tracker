@@ -18,7 +18,11 @@ export default function AddStreak( { navigation }: AddStreakProps ): JSX.Element
 
 		
 	const handlePress = async (): Promise<void> => {
-		await AsyncStorage.setItem('foo', streakTitle + " value")
+		if (await AsyncStorage.getItem(streakTitle) !== null) {
+			console.error('key already in use')
+			throw 'key already in use'
+		}
+		await AsyncStorage.setItem(streakTitle, Date.now().toString())
 	}
 
   return (

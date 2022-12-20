@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export const setTimeInStorage = async (time: string, key: string): Promise<void> => {
+export const setTimeInStorage = async (key: string, time: string): Promise<void> => {
 	if (await AsyncStorage.getItem(key) !== null) {
 		console.error('key already in use')
 		throw 'key already in use'
