@@ -1,0 +1,1 @@
+export const MAIN_STREAK_OBJECT_KEY: string = '@MAIN_STREAK_OBJECT_KEY' as const

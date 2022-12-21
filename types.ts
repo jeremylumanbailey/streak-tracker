@@ -3,3 +3,8 @@ export type RootStackParamList = {
   AddStreak: undefined,
 	Settings: undefined
 };
+
+export type streakType = {
+	streakTitle: string
+	epochTime: number
+}
