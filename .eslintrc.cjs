@@ -10,6 +10,7 @@ module.exports = {
 		"@typescript-eslint/explicit-function-return-type": "off",
 		"no-console": ["error", { allow: ["error"] }],
 		"react-hooks/rules-of-hooks": "error", // Checks rules of Hooks
-    "react-hooks/exhaustive-deps": "warn"
+    "react-hooks/exhaustive-deps": "warn",
+    "@typescript-eslint/semi": ["error", "never"]
 	}
 };

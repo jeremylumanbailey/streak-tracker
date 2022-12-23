@@ -3,6 +3,8 @@ import { MAIN_STREAK_OBJECT_KEY }  from './globalConstants'
 import { streakType } from './types';
 import { Alert } from 'react-native';
 
+
+
 export const initializeMainStreakObject = async (streak: streakType[]): Promise<void> => await AsyncStorage.setItem(MAIN_STREAK_OBJECT_KEY, JSON.stringify(streak))
 
 const mainStreakObjectExist = async (): Promise<boolean> => {
@@ -39,5 +41,20 @@ export const createStreak = async (streak: streakType): Promise<void> => {
 	await updateStreaks(mainStreakArray)
 }
 
+export const getAllStreaks = async (): Promise<streakType[] | null> => {
+	if (await mainStreakObjectExist() === false) return null
+		const mainStreakObject = await getMainStreakObject()
+		return convertMainStreakObjectStringToArray(mainStreakObject)
+}
+
+export const getSpecificStreak = async (streakTitle: string): Promise<streakType | null> => {
+	const allStreaks = await getAllStreaks()
+	if(allStreaks === null) return null
+	const specificStreak = allStreaks.find(streak => streak.streakTitle === streakTitle)
+	if(specificStreak === undefined) return null
+	return specificStreak
+}
+
+// eslint-disable-next-line no-console
 export const logMainObjectKey = async (): Promise<void> => console.log(await AsyncStorage.getItem(MAIN_STREAK_OBJECT_KEY))
 export const deleteEverything = async (): Promise<void> => await AsyncStorage.clear()
