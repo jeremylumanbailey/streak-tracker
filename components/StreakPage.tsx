@@ -1,6 +1,6 @@
 import { StyleSheet, View, Button, Text } from 'react-native'
 import { StackNavigationProp } from '@react-navigation/stack'
-import type { RootStackParamList } from '../types'
+import type { RootStackParamList, streakType } from '../types'
 import React from 'react'
 
 
@@ -11,7 +11,7 @@ type StreakPageProps = {
   navigation: StreakPageNavigation;
 }
 
-export default function StreakPage( { navigation }: StreakPageProps ): JSX.Element {
+export default function StreakPage( { navigation  }: StreakPageProps ): JSX.Element {
 
   return (
     <View style={styles.container}>

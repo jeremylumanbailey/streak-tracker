@@ -38,7 +38,7 @@ type HomeNavigationProp = StackNavigationProp<RootStackParamList>
 						<StreakItem 
 							streakData={streak} 
 							key={streak.epochTime}
-							//onPress={() => navigation.navigate("StreakPage")}
+							func={() => navigation.navigate("StreakPage")}
 						></StreakItem>)})
 			} 
 			return <Text>You don't have any streaks yet! Time to add some. </Text>
