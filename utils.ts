@@ -1,4 +1,4 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage'
 import { MAIN_STREAK_OBJECT_KEY }  from './globalConstants'
 import { streakType } from './types'
 import { Alert } from 'react-native'

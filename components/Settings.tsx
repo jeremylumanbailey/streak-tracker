@@ -1,5 +1,5 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, View, Text } from 'react-native';
+import { StatusBar } from 'expo-status-bar'
+import { StyleSheet, View, Text } from 'react-native'
 
 export default function Settings(): JSX.Element {
   return (
