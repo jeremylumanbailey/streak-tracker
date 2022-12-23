@@ -7,7 +7,7 @@ export default function Settings(): JSX.Element {
 			<Text>This is Settings.tsx</Text>
       <StatusBar style="auto" />
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
@@ -17,4 +17,4 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-});
+})
