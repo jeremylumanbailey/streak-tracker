@@ -1,7 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { MAIN_STREAK_OBJECT_KEY }  from './globalConstants'
-import { streakType } from './types';
-import { Alert } from 'react-native';
+import { streakType } from './types'
+import { Alert } from 'react-native'
 
 
 
@@ -53,6 +53,13 @@ export const getSpecificStreak = async (streakTitle: string): Promise<streakType
 	const specificStreak = allStreaks.find(streak => streak.streakTitle === streakTitle)
 	if(specificStreak === undefined) return null
 	return specificStreak
+}
+
+export const deleteSpecificStreak = async (streakTitle: string) => {
+	const allStreaks = await getAllStreaks()
+	if(allStreaks === null) return
+	const arrayWithoutSpecificStreak = allStreaks.filter(streak => streak.streakTitle !== streakTitle)
+	await updateStreaks(arrayWithoutSpecificStreak)
 }
 
 // eslint-disable-next-line no-console

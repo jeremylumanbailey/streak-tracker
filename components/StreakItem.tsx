@@ -4,7 +4,7 @@ import { Card, Title, Paragraph } from 'react-native-paper'
 
 type redirectFunc = (event: GestureResponderEvent) => void
 
-export default function StreakItem( { streakData, func }: { streakData: streakType, func: redirectFunc },  ): JSX.Element {
+export default function StreakItem( { streakData, func }: { streakData: streakType, func:redirectFunc },  ): JSX.Element {
   return (
 		<Card 
 		style={styles.card}

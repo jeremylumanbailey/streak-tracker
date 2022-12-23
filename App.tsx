@@ -9,10 +9,11 @@ import StreakItem from './components/StreakItem'
 import { useEffect, useState } from "react"
 import type { RootStackParamList, streakType } from './types'
 import { getAllStreaks } from './utils'
-import StreakPage, { StreakPageNavigation } from './components/StreakPage'
+import StreakPage from './components/StreakPage'
 import { StackNavigationProp } from '@react-navigation/stack'
 
 const nativeStackNavigator = createNativeStackNavigator<RootStackParamList>()
+
 
 type HomeNavigationProp = StackNavigationProp<RootStackParamList>
 	
@@ -38,7 +39,7 @@ type HomeNavigationProp = StackNavigationProp<RootStackParamList>
 						<StreakItem 
 							streakData={streak} 
 							key={streak.epochTime}
-							func={() => navigation.navigate("StreakPage")}
+							func={() => navigation.navigate("StreakPage", {streakPageData: streak})}
 						></StreakItem>)})
 			} 
 			return <Text>You don't have any streaks yet! Time to add some. </Text>
@@ -52,17 +53,14 @@ type HomeNavigationProp = StackNavigationProp<RootStackParamList>
 			<Button
 				title="log all keys"
 				onPress={async () => {
+					// eslint-disable-next-line no-console
 					console.log(await AsyncStorage.getAllKeys())
 				}}
 			/>
-			<Button
-				title='anime'
-				onPress={() => navigation.navigate("StreakPage")}
-				/>
       <StatusBar style="auto" />
 			</View>
     
-
+		
 	)
 }  
 
