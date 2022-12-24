@@ -11,6 +11,7 @@ import type { RootStackParamList, streakType } from './types'
 import { getAllStreaks } from './utils'
 import StreakPage from './components/StreakPage'
 import { StackNavigationProp } from '@react-navigation/stack'
+import { Surface } from 'react-native-paper'
 
 const nativeStackNavigator = createNativeStackNavigator<RootStackParamList>()
 
@@ -34,29 +35,28 @@ type HomeNavigationProp = StackNavigationProp<RootStackParamList>
 	
 		const retStreaks = (streakArr: streakType[]) => {
 			if(streakArr.length > 0) {
-				return streakArr.map(streak => {
-					return (
-						<StreakItem 
-							streakData={streak} 
-							key={streak.epochTime}
-							func={() => navigation.navigate("StreakPage", {streakPageData: streak})}
-						></StreakItem>)})
+				return (		
+				<ScrollView style={styles.fullWidth}>					
+					{streakArr.map(streak => {
+						return (
+							<StreakItem 
+								streakData={streak} 
+								key={streak.epochTime}
+								func={() => navigation.navigate("StreakPage", {streakPageData: streak})}
+							></StreakItem>)})}
+					</ScrollView>)
 			} 
-			return <Text>You don't have any streaks yet! Time to add some. </Text>
+			return (
+				<Surface style={styles.surface} elevation={4}>
+					<Text numberOfLines={2} adjustsFontSizeToFit={true} style={styles.centerText}>No streaks currently active. {"\n"}
+					Hit the Add button to start some new streaks!</Text>
+				</Surface>
+			)
 		}
 
 	return (
 			<View style={styles.container}>
-		<ScrollView style={styles.fullWidth}>
 			{retStreaks(localStreaks)}
-			</ScrollView>
-			<Button
-				title="log all keys"
-				onPress={async () => {
-					// eslint-disable-next-line no-console
-					console.log(await AsyncStorage.getAllKeys())
-				}}
-			/>
       <StatusBar style="auto" />
 			</View>
     
@@ -107,6 +107,17 @@ const styles = StyleSheet.create({
 	},
 	streakItem: {
 		marginBottom: '400px'
+	},
+	surface: {
+		height: '100%',
+		width: '100%',
+		alignItems: 'center',
+		justifyContent: 'center',
+	},
+	centerText: {
+		fontSize: 30,
+		textAlign: 'center',
+		fontWeight: 'bold',
 	}
 })
 
