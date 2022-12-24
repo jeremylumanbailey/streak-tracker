@@ -62,6 +62,12 @@ export const deleteSpecificStreak = async (streakTitle: string) => {
 	await updateStreaks(arrayWithoutSpecificStreak)
 }
 
+export const epochToDate = (streak: streakType) => {
+	const date = new Date(0) // The 0 there is the key, which sets the date to the epoch
+	date.setUTCSeconds(streak.epochTime)
+	return date
+}
+
 // eslint-disable-next-line no-console
 export const logMainObjectKey = async (): Promise<void> => console.log(await AsyncStorage.getItem(MAIN_STREAK_OBJECT_KEY))
 export const deleteEverything = async (): Promise<void> => await AsyncStorage.clear()

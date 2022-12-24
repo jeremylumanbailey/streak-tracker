@@ -2,17 +2,22 @@ import { StatusBar } from 'expo-status-bar'
 import { StyleSheet, View, Button, Text, TextInput } from 'react-native'
 import { useState } from "react"
 import { StackNavigationProp } from '@react-navigation/stack'
-import type { RootStackParamList } from '../types'
-import { createStreak, deleteEverything, logMainObjectKey } from '../utils'
+import type { RootStackParamList, streakType } from '../types'
+import { createStreak, deleteEverything } from '../utils'
 import React from 'react'
+import { Snackbar } from 'react-native-paper'
 
 type AddStreakNavigationProp = StackNavigationProp<RootStackParamList>
 
 export default function AddStreak( { navigation }: {navigation :AddStreakNavigationProp } ): JSX.Element {
 	const [ streakTitle, setStreakTitle ] = useState("")
 	const handlePress = async (): Promise<void> => {
-		await createStreak({streakTitle, epochTime: Date.now()})
-		await logMainObjectKey()
+		const newStreak: streakType = {
+			streakTitle,
+			epochTime: Date.now()
+		}
+		await createStreak(newStreak)
+		navigation.navigate('StreakPage', {streakPageData: newStreak})
 	}
 
   return (
@@ -26,7 +31,7 @@ export default function AddStreak( { navigation }: {navigation :AddStreakNavigat
 					title="Add Streak"
 					onPress={handlePress}
 				/>
-				<Button title="back to home" onPress={(): void => navigation.navigate('StreakPage')} />
+				<Button title="back to home" onPress={(): void => navigation.navigate('Home')} />
 				<Button title="delete everything" onPress={deleteEverything} />
 
       <Text>This is AddStreak.tsx hold up</Text>
