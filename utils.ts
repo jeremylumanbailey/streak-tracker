@@ -69,7 +69,7 @@ export const deleteSpecificStreak = async (streakTitle: string) => {
 //}
 
 export const secondsSinceStreakStart = (streak: streakType) => {
-	const dif = new Date().getTime() - streak.epochTime
+	const dif = Math.abs(new Date().getTime() - streak.epochTime)
 	return Math.floor(dif / 1000)
 }
 
