@@ -1,8 +1,8 @@
 import { StyleSheet, View, Button, Text } from 'react-native'
 import type { NativeStackScreenProps } from '@react-navigation/native-stack'
-import type { RootStackParamList, streakType } from '../types'
+import type { RootStackParamList } from '../types'
 import React, { useEffect, useState } from 'react'
-import { deleteSpecificStreak, secondsdBetweenDate } from '../utils'
+import { deleteSpecificStreak, secondsSinceStreakStart } from '../utils'
 import { Alert } from 'react-native'
 
 
@@ -15,7 +15,7 @@ type ProfileProps = NativeStackScreenProps<RootStackParamList, 'StreakPage'>
 
 export default function StreakPage( { route, navigation }: ProfileProps ): JSX.Element {
 	const { streakPageData } = route.params
-	const [streakDate, setStreakDate ] = useState<number>(secondsdBetweenDate(streakPageData))
+	const [streakDate, setStreakDate ] = useState<number>(secondsSinceStreakStart(streakPageData))
 
 	const handlePress = async () =>{
 		Alert.alert(
@@ -36,7 +36,7 @@ export default function StreakPage( { route, navigation }: ProfileProps ): JSX.E
 
 	useEffect(() => {
 		const intervalId = setInterval(() => {  //assign interval to a variable to clear it.
-			setStreakDate(secondsdBetweenDate(streakPageData))
+			setStreakDate(secondsSinceStreakStart(streakPageData))
 		}, 1000)
 		return () => clearInterval(intervalId) //This is important
 	}, [streakPageData])
