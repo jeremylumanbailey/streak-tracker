@@ -62,10 +62,15 @@ export const deleteSpecificStreak = async (streakTitle: string) => {
 	await updateStreaks(arrayWithoutSpecificStreak)
 }
 
-export const epochToDate = (streak: streakType) => {
-	const date = new Date(0) // The 0 there is the key, which sets the date to the epoch
-	date.setUTCSeconds(streak.epochTime)
-	return date
+//export const epochToDate = (streak: streakType) => {
+//	const date = new Date(0) // The 0 there is the key, which sets the date to the epoch
+//	date.setUTCSeconds(streak.epochTime)
+//	return date
+//}
+
+export const secondsdBetweenDate = (streak: streakType) => {
+	const dif = new Date().getTime() - streak.epochTime
+	return Math.floor(dif / 1000)
 }
 
 // eslint-disable-next-line no-console
