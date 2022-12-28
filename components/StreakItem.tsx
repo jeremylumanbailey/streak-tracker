@@ -2,16 +2,16 @@ import { GestureResponderEvent, StyleSheet } from 'react-native'
 import { streakType } from '../types'
 import { Card, Title, Paragraph } from 'react-native-paper'
 import { useEffect, useState } from 'react'
-import { secondsSinceStreakStart } from '../utils'
+import { timeLeft, timeLeftType, highestTime } from '../timeUtils'
 
 type redirectFunc = (event: GestureResponderEvent) => void
 
 export default function StreakItem( { streakData, func }: { streakData: streakType, func:redirectFunc },  ): JSX.Element {
-	const [streakDate, setStreakDate ] = useState<number>(secondsSinceStreakStart(streakData))
+	const [streakDate, setStreakDate ] =  useState<timeLeftType>(timeLeft(streakData))
 
 	useEffect(() => {
 		const intervalId = setInterval(() => {  //assign interval to a variable to clear it.
-			setStreakDate(secondsSinceStreakStart(streakData))
+			setStreakDate(timeLeft(streakData))
 		}, 1000)
 		return () => clearInterval(intervalId) //This is important
 	}, [streakData])
@@ -23,7 +23,7 @@ export default function StreakItem( { streakData, func }: { streakData: streakTy
 		>
 				<Card.Content>
 					<Title>{streakData.streakTitle}</Title>
-					<Paragraph>You have been {streakData.streakTitle} free for {streakDate} seconds</Paragraph>
+					<Paragraph>You have been {streakData.streakTitle} free for {highestTime(streakDate)}</Paragraph>
 				</Card.Content>
 		</Card>
   )

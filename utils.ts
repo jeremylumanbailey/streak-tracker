@@ -68,11 +68,6 @@ export const deleteSpecificStreak = async (streakTitle: string) => {
 //	return date
 //}
 
-export const secondsSinceStreakStart = (streak: streakType) => {
-	const dif = Math.abs(new Date().getTime() - streak.epochTime)
-	return Math.floor(dif / 1000)
-}
-
 // eslint-disable-next-line no-console
 export const logMainObjectKey = async (): Promise<void> => console.log(await AsyncStorage.getItem(MAIN_STREAK_OBJECT_KEY))
 export const deleteEverything = async (): Promise<void> => await AsyncStorage.clear()
