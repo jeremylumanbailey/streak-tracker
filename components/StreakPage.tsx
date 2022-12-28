@@ -2,7 +2,8 @@ import { StyleSheet, View, Button, Text } from 'react-native'
 import type { NativeStackScreenProps } from '@react-navigation/native-stack'
 import type { RootStackParamList } from '../types'
 import React, { useEffect, useState } from 'react'
-import { deleteSpecificStreak, secondsSinceStreakStart } from '../utils'
+import { deleteSpecificStreak } from '../utils'
+import { secondsSinceStreakStart, timeLeft, timeLeftType } from '../timeUtils'
 import { Alert } from 'react-native'
 
 
@@ -15,7 +16,7 @@ type ProfileProps = NativeStackScreenProps<RootStackParamList, 'StreakPage'>
 
 export default function StreakPage( { route, navigation }: ProfileProps ): JSX.Element {
 	const { streakPageData } = route.params
-	const [streakDate, setStreakDate ] = useState<number>(secondsSinceStreakStart(streakPageData))
+	const [streakDate, setStreakDate ] = useState<timeLeftType>(timeLeft(streakPageData))
 
 	const handlePress = async () =>{
 		Alert.alert(
@@ -36,7 +37,7 @@ export default function StreakPage( { route, navigation }: ProfileProps ): JSX.E
 
 	useEffect(() => {
 		const intervalId = setInterval(() => {  //assign interval to a variable to clear it.
-			setStreakDate(secondsSinceStreakStart(streakPageData))
+			setStreakDate(timeLeft(streakPageData))
 		}, 1000)
 		return () => clearInterval(intervalId) //This is important
 	}, [streakPageData])
@@ -45,14 +46,22 @@ export default function StreakPage( { route, navigation }: ProfileProps ): JSX.E
   return (
     <View style={styles.container}>
 			<Text>{`You are editing ${streakPageData.streakTitle}.
-			The date you started this streak is ${streakDate}`}</Text>
-			<Button title="Save/Back to home" onPress={(): void => navigation.navigate('Home')} />
-			<Button title="Delete" onPress={handlePress} />
+			You have had your streak for  ${streakDate.days} days ${streakDate.hours} hours, ${streakDate.minutes} minutes and ${streakDate.seconds} seconds`}</Text>
+			<View style={styles.actionButtons}>
+					<Button title="Save/Back to home" onPress={(): void => navigation.navigate('Home')} />
+					<Button title="Delete" onPress={handlePress} />
+			</View>
     </View>
   )
 }
 
 const styles = StyleSheet.create({
+	actionButtons: {
+		flexDirection: 'row',
+		justifyContent:"space-evenly",
+		alignItems: 'center',
+		width: '100%'		
+	},
   container: {
     flex: 1,
     backgroundColor: '#fff',
