@@ -16,7 +16,6 @@ import { IconButton } from 'react-native-paper'
 
 const nativeStackNavigator = createNativeStackNavigator<RootStackParamList>()
 
-
 type HomeNavigationProp = StackNavigationProp<RootStackParamList>
 	
 	export const Home = ( { navigation }: {navigation: HomeNavigationProp }) => {
@@ -89,8 +88,6 @@ type HomeNavigationProp = StackNavigationProp<RootStackParamList>
 	)
 }  
 
-
-
 export default function App(): JSX.Element {
   return (		
 		<NavigationContainer>
@@ -101,9 +98,6 @@ export default function App(): JSX.Element {
 					options={{
 						title: 'Home',headerShown: false
 					}}
-					//options={({ navigation }: {navigation: HomeNavigationProp }) => ({
-          //  headerRight: () => <Button title="Add Streak" onPress={(): void => navigation.navigate('AddStreak')} />,
-          //})}
 				/>
         <nativeStackNavigator.Screen
           name="AddStreak"
