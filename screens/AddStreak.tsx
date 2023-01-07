@@ -23,29 +23,56 @@ export default function AddStreak( { navigation }: {navigation :AddStreakNavigat
 
   return (
     <View style={styles.container}>
+			<View>
+				<Text 
+				style={styles.text}
+				numberOfLines={1} 
+				adjustsFontSizeToFit={true}
+				>
+					Add your streak title below! 
+				</Text>
+			</View>
 			<TextInput
-        onChangeText={setStreakTitle}
-        placeholder={"Add Streak Title"}
+				style={styles.input}
+				onChangeText={setStreakTitle}
+				placeholder={"Add Streak Title"}
 				defaultValue={streakTitle}
-      />
+			/>
+			<View style={styles.buttonContainer}>
 				<Button
 					title="Add Streak"
 					onPress={handlePress}
 				/>
 				<Button title="back to home" onPress={(): void => navigation.navigate('Home')} />
-				<Button title="delete everything" onPress={deleteEverything} />
+			</View>
 
-      <Text>This is AddStreak.tsx hold up</Text>
       <StatusBar style="auto" />
     </View>
   )
 }
 
 const styles = StyleSheet.create({
+	buttonContainer: {
+		margin: '10%',
+		width: '100%',
+		flexDirection: 'row',
+		justifyContent:"space-evenly",
+		alignItems: 'center',
+	},
   container: {
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+		textAlign: 'center'
   },
+	text: {
+		fontSize: 50,
+		width: '100%',
+		margin: '5%',
+		fontWeight: 'bold'
+	},
+	input: {
+		fontSize: 25
+	}
 })

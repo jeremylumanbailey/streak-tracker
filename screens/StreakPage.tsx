@@ -43,7 +43,10 @@ export default function StreakPage( { route, navigation }: ProfileProps ): JSX.E
 			<View style={styles.content}>
 				<View>
 					<View style={styles.textContent}>
-						<Text style={styles.text}>{`You are editing ${streakPageData.streakTitle}.`}</Text>
+						<Text style={styles.text}
+										numberOfLines={1} 
+										adjustsFontSizeToFit={true}
+						>{`${streakPageData.streakTitle} streak`}</Text>
 					</View>
 					<View style={styles.allTiles}>
 								<TimeTile streakDate={streakDate} timeKey='seconds'></TimeTile>
@@ -102,6 +105,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
 	},
 	text: {
-		textAlign: 'center'
+		textAlign: 'center',
+		fontWeight: 'bold',
+		fontSize: 25,
 	}
 })
