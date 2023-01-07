@@ -1,3 +1,5 @@
+Copyright 2023, Jeremy Bailey, All rights reserved.
+
 Requirements: npm and Nodejs
 
 Setup
