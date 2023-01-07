@@ -2,14 +2,13 @@ import { StatusBar } from 'expo-status-bar'
 import { StyleSheet, Text, View, Button, ScrollView } from 'react-native'
 import { NavigationContainer, useIsFocused } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
-import AddStreak from "./components/AddStreak"
-import Settings from './components/Settings'
-import AsyncStorage from '@react-native-async-storage/async-storage'
-import StreakItem from './components/StreakItem'
+import AddStreak from "./screens/AddStreak"
+import Settings from './screens/Settings'
+import StreakItem from './screens/StreakItem'
 import { useEffect, useState } from "react"
 import type { RootStackParamList, streakType } from './types'
 import { getAllStreaks } from './utils'
-import StreakPage from './components/StreakPage'
+import StreakPage from './screens/StreakPage'
 import { StackNavigationProp } from '@react-navigation/stack'
 import { Surface } from 'react-native-paper'
 
