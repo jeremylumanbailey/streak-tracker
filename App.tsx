@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar'
-import { StyleSheet, Text, View, Button, ScrollView } from 'react-native'
+import { StyleSheet, Text, View, ScrollView } from 'react-native'
 import { NavigationContainer, useIsFocused } from '@react-navigation/native'
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import AddStreak from "./screens/AddStreak"
@@ -11,6 +11,8 @@ import { getAllStreaks } from './utils'
 import StreakPage from './screens/StreakPage'
 import { StackNavigationProp } from '@react-navigation/stack'
 import { Surface } from 'react-native-paper'
+
+import { IconButton } from 'react-native-paper'
 
 const nativeStackNavigator = createNativeStackNavigator<RootStackParamList>()
 
@@ -33,23 +35,47 @@ type HomeNavigationProp = StackNavigationProp<RootStackParamList>
 
 	
 		const retStreaks = (streakArr: streakType[]) => {
+			const addButtonSize = 45
+			const buttonBackGroundColor = '#2096F3'
 			if(streakArr.length > 0) {
 				return (		
-				<ScrollView style={styles.fullWidth}>					
-					{streakArr.map(streak => {
-						return (
-							<StreakItem 
-								streakData={streak} 
-								key={streak.epochTime}
-								func={() => navigation.navigate("StreakPage", {streakPageData: streak})}
-							></StreakItem>)})}
-					</ScrollView>)
+					<View style={styles.fullPage}>
+						<ScrollView style={styles.almostFullWidth}>					
+							{streakArr.map(streak => {
+								return (
+									<StreakItem 
+										streakData={streak} 
+										key={streak.epochTime}
+										func={() => navigation.navigate("StreakPage", {streakPageData: streak})}
+									></StreakItem>)})}
+							</ScrollView>
+							<IconButton
+								icon="plus"
+								containerColor={buttonBackGroundColor}
+								iconColor={'white'}
+								size={addButtonSize}
+								onPress={(): void => navigation.navigate('AddStreak')}
+								style={styles.addButton}
+							/>
+					</View>
+					)
 			} 
 			return (
-				<Surface style={styles.surface} elevation={4}>
-					<Text numberOfLines={2} adjustsFontSizeToFit={true} style={styles.centerText}>No streaks currently active. {"\n"}
-					Hit the Add button to start some new streaks!</Text>
-				</Surface>
+				<View style={styles.fullPage}>
+					<Surface style={styles.surface} elevation={4}>
+						<Text numberOfLines={2} adjustsFontSizeToFit={true} style={styles.centerText}>No streaks currently active. {"\n"}
+						Hit the Add button to start some new streaks!</Text>
+					</Surface>
+					<IconButton
+						icon="plus"
+						containerColor={buttonBackGroundColor}
+						iconColor={'white'}
+						size={addButtonSize}
+						onPress={(): void => navigation.navigate('AddStreak')}
+						style={styles.addButton}
+					/>
+				</View>
+				
 			)
 		}
 
@@ -72,18 +98,22 @@ export default function App(): JSX.Element {
 				<nativeStackNavigator.Screen
 					name="Home"
 					component={Home}
-					options={({ navigation }: {navigation: HomeNavigationProp }) => ({
-            headerRight: () => <Button title="Add Streak" onPress={(): void => navigation.navigate('AddStreak')} />,
-          })}
+					options={{
+						title: 'Home',headerShown: false
+					}}
+					//options={({ navigation }: {navigation: HomeNavigationProp }) => ({
+          //  headerRight: () => <Button title="Add Streak" onPress={(): void => navigation.navigate('AddStreak')} />,
+          //})}
 				/>
         <nativeStackNavigator.Screen
           name="AddStreak"
           component={AddStreak}
-          options={{ title: 'Add a Streak' }}
+          options={{ title: 'Add a Streak', headerShown: false }}
         />
 				<nativeStackNavigator.Screen
           name="StreakPage"
           component={StreakPage}
+          options={{ title: 'Streak', headerShown: false }}
         />
         <nativeStackNavigator.Screen name="Settings" component={Settings} />
       </nativeStackNavigator.Navigator>
@@ -100,9 +130,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-	fullWidth: {
+	almostFullWidth: {
 		width: '93%',
 		display: 'flex',
+	},
+	fullPage: {
+		marginTop: '25%',
+		width: '100%',
+		height: '100%',
+		display: 'flex',
+    alignItems: 'center',
 	},
 	streakItem: {
 		marginBottom: '400px'
@@ -117,6 +154,12 @@ const styles = StyleSheet.create({
 		fontSize: 30,
 		textAlign: 'center',
 		fontWeight: 'bold',
+	},
+	addButton: {
+		elevation: 3, // works on android
+		position: 'absolute',
+		bottom: '7%',
+		right: '5%',
 	}
 })
 
