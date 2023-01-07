@@ -3,9 +3,8 @@ import { StyleSheet, View, Button, Text, TextInput } from 'react-native'
 import { useState } from "react"
 import { StackNavigationProp } from '@react-navigation/stack'
 import type { RootStackParamList, streakType } from '../types'
-import { createStreak, deleteEverything } from '../utils'
+import { createStreak, deleteEverything, streakTitleNotEmpty } from '../utils'
 import React from 'react'
-import { Snackbar } from 'react-native-paper'
 
 type AddStreakNavigationProp = StackNavigationProp<RootStackParamList>
 
@@ -16,8 +15,10 @@ export default function AddStreak( { navigation }: {navigation :AddStreakNavigat
 			streakTitle,
 			epochTime: Date.now()
 		}
-		await createStreak(newStreak)
-		navigation.navigate('StreakPage', {streakPageData: newStreak})
+		if(streakTitleNotEmpty(newStreak)) {
+			await createStreak(newStreak)
+			navigation.navigate('StreakPage', {streakPageData: newStreak})
+		}
 	}
 
   return (

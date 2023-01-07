@@ -32,6 +32,12 @@ const isDuplicateStreak = (currentStreaks: streakType[], newStreak: streakType):
 	})
 }
 
+export const streakTitleNotEmpty = (streak: streakType): boolean => { 
+	if(/([^\s])/.test(streak.streakTitle)) return true
+	Alert.alert('Your streak needs a title')
+	return false
+ } 
+
 export const createStreak = async (streak: streakType): Promise<void> => {
 	if (await mainStreakObjectExist() === false) return await initializeMainStreakObject([streak])
 	const mainStreakObject = await getMainStreakObject()
